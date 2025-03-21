@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maquette Beauté</title>
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Italiana&display=swap');
+
+
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('background.jpg') no-repeat center center/cover;
+            font-family: 'Kaushan Script', cursive;
+            font-size: 40px;
+          line-height: 64px;
+         letter-spacing: 2.5%;
+         text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7); /* Ombre derrière le texte */
+        }
+        
+
+        /* Style du menu */
+      .menu {
+         font-family: 'Italiana', serif;
+         font-size: 20px;
+         font-weight: 200;
+         line-height: 64px;
+         letter-spacing: 2.5%;
+         text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.0); /* Ombre derrière le texte */
+        }
+
+        /* Fonds en superposition */
+        .background-image-1, .background-image-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .background-image-1 {
+            background-image: url('Fond 2 - Copie.jpg');
+            opacity: 1;
+        }
+
+        .background-image-2 {
+            background-image: url('Fond - Copie.jpg');
+            opacity: 0.7;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+        .menu a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            margin: 0 30px;
+        }
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            grid-column-gap: 10px;
+            grid-row-gap: 20px;
+            padding: 40px;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .item img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 20px;
+        }
+        .text-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .text {
+            position: relative;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            padding: 10px;
+        }
+        .text.black {
+            color: black;
+        }
+        .text.red {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+     <!-- Fonds superposés -->
+     <div class="background-image-1 parallax-scroll"></div>
+     <div class="background-image-2 parallax-scroll"></div>
+
+    <nav class="menu">
+        <div>☰</div>
+        <div>
+            <a href="#">Profil</a>
+            <a href="#">Favoris</a>
+            <a href="#">Partager</a>
+        </div>
+    </nav>
+    <div class="parent">
+        <div class="item" style="grid-column: 1 / 2; grid-row: 1 / 2;">
+            <img src="image1.jpg" alt="Model 1" class="parallax-item">
+        </div>
+        <div class="text-container" style="grid-column: 2 / 3; grid-row: 1 / 2;">
+            <div class="background-overlay"></div>
+            <div class="background-overlay-2"></div>
+            <div class="text parallax-item"></div>
+            <div class="text black">your beauty</div>
+        </div>
+        <div class="item" style="grid-column: 4 / 5; grid-row: 1 / 2;" >
+            <img src="image5.jpg" alt="Model 2" class="parallax-item">
+        </div>
+        <div class="item" style="grid-column: 2 / 3; grid-row: 2 / 3;">
+            <img src="image2.jpg" alt="Model 3" class="parallax-item">
+        </div>
+        <div class="item" style="grid-column: 5 / 5; grid-row: 2 / 3;">
+            <img src="image4.jpg" alt="Model 4" class="parallax-item">
+        </div>
+
+        <div class="text-container" style="grid-column: 5 / 4; grid-row: 2 / 3;">
+            <div class="background-overlay"></div>
+            <div class="background-overlay-2"></div>
+            <div class="text parallax-item"></div>
+            <div class="text white">your rules</div>
+        </div>
+    </div>
+    <!-- Espace pour scroller -->
+    <div class="spacer"></div>
+
+    <!-- Script JavaScript pour l'effet de parallaxe -->
+    <script>
+        document.addEventListener("mousemove", function(event) {
+            let x = (event.clientX / window.innerWidth) * 40 - 20;
+            let y = (event.clientY / window.innerHeight) * 40 - 20;
+
+            document.querySelectorAll(".parallax").forEach(el => {
+                el.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
+            });
+
+            document.querySelectorAll(".parallax-item").forEach(el => {
+                el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+        });
+
+        document.addEventListener("scroll", function() {
+            let scrollTop = window.scrollY;
+
+            document.querySelectorAll(".parallax-scroll").forEach(el => {
+                el.style.transform = `translateY(${scrollTop * 0.2}px)`;
+            });
+
+            document.querySelectorAll(".parallax-item").forEach(el => {
+                el.style.transform = `translateY(${scrollTop * 0.1}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
+
